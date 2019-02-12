@@ -4,7 +4,7 @@ var app = express();
 var router = express.Router();
 var port = process.env.PORT || 3000;
 var mongojs = require('mongojs');
-var db = mongojs("mongodb://[User_ID]:[Password]]@ds243084.mlab.com:43084/kiraana");
+var db = mongojs("mongodb://[User_ID]:[Password]@ds243084.mlab.com:43084/kiraana");
 
 var Data = require('./DataSchema');
 
