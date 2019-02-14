@@ -12,39 +12,12 @@ import { Actions } from 'react-native-router-flux';
 import Navbar from './component/Navbar';
 import SideMenu from './component/SideMenu';
 import SideMenuDrawer from './component/SideMenuDrawer';
-import { Container, Content, View, Button, Left, Right, Icon, Card, CardItem, cardBody } from 'native-base';
+import { Container, Content, View, Button, Left, Right, Icon, Card, CardItem, CardBody,Footer,FooterTab,Header } from 'native-base';
 
 const {height, width} = Dimensions.get('window');
 
 export default class App extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      displayCodePin: true,
-      success: '',
-      code:''
-    };
-  }
-  _onFinishCheckingCode2(isValid,code)
-  {
-    if(!isValid) {
-      Alert.alert('Confimation Code', 'Code not match!',[{text : 'OK'}],{
-        canceleable: false,
-      })
-    }
-    else {
-      this.setState ({code })
-      Alert.alert('Confirmation Code ', 'Code Successful!',[{text :'OK',onPress:() => {Actions.home()}}],{
-    canceleable : false,})
-    }
-  }
-  onSuccess = () => {
-    this.setState({
-      displayCodePin: false,
-      success: 'A success message :)'
-    });
-  };
   render() {
     var left = (
       <Left style={{flex:1}}>
@@ -61,6 +34,7 @@ export default class App extends Component {
         style={{width:35, height:18}} />
       </Text>
       </Right>
+
     );
     return(
       <SideMenuDrawer ref={(ref) => this._sideMenuDrawer = ref}>
@@ -68,74 +42,129 @@ export default class App extends Component {
             <Navbar left={left} right={right} title="KC Merchant" color = "white"/>
             <Content>
               {this.renderpin()}
+
+
             </Content>
           </Container>
       </SideMenuDrawer>
     );
   }
 
+
   renderpin() {
     return (
-      <View style={styles.container}>
+
+            <Container >
+
+                <Card>
+                <CardItem >
+                 <Button
+                    transparent
+                    onPress = {() => Actions.add()}>
+                  <Icon active name="ios-add-circle"  />
+                  <Text styles={{marginLeft:100}}>Add Product</Text>
+
+                  <Card>
+                  <CardItem >
+                   <Button
+                      transparent
+                      onPress = {() => Actions.add()}>
+                    <Icon active name="ios-add-circle"  />
+                    <Text styles={{marginLeft:100}}>Add Category</Text>
+
+                  </Button>
+                 </CardItem>
+               </Card>
+
+                <Card>
+                 <CardItem>
+                 <Button
+                    transparent
+                    onPress = {() => Actions.stalk()}>
+                   <Icon active name="ios-add-circle" />
+                   <Text>Stalk</Text>
 
 
 
-            <TouchableOpacity
-               style = {styles.submitButton}
-               onPress = {
-                  () => Actions.add()
-               }>
-               <Text style = {styles.submitButtonText}> Add Product </Text>
-            </TouchableOpacity>
+                   </Button>
+                  </CardItem>
+                </Card>
 
-                  <TouchableOpacity
-                     style = {styles.submitButton}
-                     onPress = {
-                        () => Actions.stalk()
-                     }>
-                     <Text style = {styles.submitButtonText}> Stalk </Text>
-                  </TouchableOpacity>
-
-                        <TouchableOpacity
-                           style = {styles.submitButton}
-                           onPress = {
-                              () => Actions.os()
-                           }>
-                           <Text style = {styles.submitButtonText}> Order Status </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                           style = {styles.submitButton}
-                           onPress = {
-                              () => Actions.add()
-                           }>
-                           <Text style = {styles.submitButtonText}>Today's Earning </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                           style = {styles.submitButton}
-                           onPress = {
-                              () => Actions.add()
-                           }>
-                           <Text style = {styles.submitButtonText}> Remaining Orders  </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                           style = {styles.submitButton}
-                           onPress = {
-                              () => Actions.add()
-                           }>
-                           <Text style = {styles.submitButtonText}> Past Orders </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                           style = {styles.submitButton}
-                           onPress = {
-                              () => Actions.add()
-                           }>
-                           <Text style = {styles.submitButtonText}> Cancelled Order</Text>
-                        </TouchableOpacity>
+                <Card>
+                  <CardItem>
+                  <Button
+                     transparent
+                     onPress = {() => Actions.os()}>
+                    <Icon active name="ios-add-circle" />
+                    <Text>Order Status</Text>
 
 
 
+                    </Button>
+                   </CardItem>
+                 </Card>
+                 <Card>
+               <CardItem>
+               <Button
+                  transparent
+                  onPress = {() => Actions.remaining()}>
+                 <Icon active name="ios-add-circle" />
+                 <Text>Remaining Delivery</Text>
 
-      </View>
+
+
+                 </Button>
+                </CardItem>
+              </Card>
+              <Card>
+                <CardItem>
+                <Button
+                   transparent
+                   onPress = {() => Actions.past()}>
+                  <Icon active name="ios-add-circle" />
+                  <Text styles>Past Deliveries</Text>
+
+
+
+                  </Button>
+                 </CardItem>
+               </Card>
+               <Card>
+                   <CardItem>
+                   <Button
+                      transparent
+                      onPress = {() => Actions.cancel()}>
+                     <Icon active name="ios-add-circle" />
+                     <Text>Cancelled Orders</Text>
+
+
+
+                     </Button>
+                    </CardItem>
+                </Card>
+
+                       <Footer styles = {{backgroundColor:"#000000"}}>
+                         <FooterTab styles = {{backgroundColor:"#000000"}}>
+                           <Button styles = {{backgroundColor:"#000000"}}>
+                             <Icon name="apps" color="#000000" />
+                           </Button>
+                           <Button>
+                             <Icon name="camera" />
+                           </Button>
+                           <Button active>
+                             <Icon active name="navigate" />
+                           </Button>
+                           <Button>
+                             <Icon name="person" />
+                           </Button>
+                         </FooterTab>
+                       </Footer>
+
+
+</Container>
+
+
+
     );
   }
 }
@@ -153,7 +182,7 @@ const styles = StyleSheet.create({
      color: '#000000',
      textShadowRadius: 5,
      margin: 1,
-     height: height/8,
+     height: height/8.5,
      width:width
   },
   submitButtonText:{
